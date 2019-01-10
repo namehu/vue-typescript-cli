@@ -2,6 +2,7 @@ const ora = require('ora');
 const chalk = require('chalk');
 const spinnerStyle = require('./spinners.json');
 const path = require('path');
+
 const spinner = ora({
   text: chalk.blue('generate begin'),
   spinner: spinnerStyle.dots
@@ -12,19 +13,19 @@ const spinner = ora({
  *
  * @export
  * @param {string} name 组件名 可以包含路径
- * @param {string} basePath 基础路径。默认为src目录
+ * @param {string} pathName 组件路径 可以包含路径
  * @returns
  */
-function getFilePathAndName(name, basePath) {
-  let fileName = name || '';
-  let filePath = path.join(basePath || 'src');
-  const paths = fileName.split('/');
-  fileName = paths[paths.length - 1];
-  filePath = path.join(filePath, ...paths);
-  // filePath = process.platform.startsWith('win') ? // 系统不同，文件夹分割/或者\\
-  //   filePath.replace(/\//g, '\\') :
-  //   filePath;
+function getDirPathAndName(name, pathName) {
+  let fileName = '';
+  let filePath = '';
+  const paths = name.split('/');
 
+  fileName = paths[paths.length - 1];
+  fileName = fileName.replace(/[-_](\w)/g, (match, p1) => p1.toUpperCase());
+
+
+  filePath = path.resolve(pathName, ...paths);
   return {
     fileName,
     filePath,
@@ -37,15 +38,18 @@ function getFilePathAndName(name, basePath) {
  *
  * @export
  * @param {string} name 组件名 可以包含路径
- * @param {string} basePath 基础路径。默认为src目录
+ * @param {string} pathName 组件基础路径
  * @returns
  */
-function getPathAndName(name, basePath) {
-  let fileName = name || '';
-  let filePath = basePath || 'src';
+function getFilePathAndName(name, pathName) {
+  let fileName = '';
+  let filePath = '';
   const paths = name.split('/');
-  fileName = paths.splice(-1);
-  filePath = path.join(filePath, ...paths);
+
+  fileName = paths.splice(-1)[0];
+  fileName = fileName.replace(/[-_](\w)/g, (match, p1) => p1.toUpperCase());
+
+  filePath = path.resolve(pathName, ...paths);
 
   return {
     fileName,
@@ -67,8 +71,8 @@ function firstUpperCase(name) {
 }
 
 module.exports = {
-  getFilePathAndName,
+  getDirPathAndName,
   firstUpperCase,
-  getPathAndName,
+  getFilePathAndName,
   spinner,
 }
