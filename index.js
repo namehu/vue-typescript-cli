@@ -1,16 +1,11 @@
 #!/usr/bin/env node
 
 var program = require('commander');
-const chalk = require('chalk');
-const ora = require('ora');
 const path = require('path');
 const fs = require('fs');
 const generateComponent = require('./actions/generateComponent');
 const generateVue = require('./actions/generateVue');
-const {
-  getDirPathAndName,
-  spinner,
-} = require('./utils');
+
 
 /**
  * 根据输入配置生成对应文件路径
