@@ -10,8 +10,9 @@ const {
   spinner,
 } = require('../utils');
 
-module.exports = (component, basePath) => new Promise((resolve) => {
-  const {
+module.exports = (component, basePath, isView) => new Promise((resolve) => {
+  let {
+    file_name,
     fileName,
     filePath
   } = getDirPathAndName(component, basePath);
@@ -29,6 +30,7 @@ module.exports = (component, basePath) => new Promise((resolve) => {
     return resolve();
   }
 
+
   // 创建文件夹
   mkdirp(filePath, (err) => {
     if (err) {
@@ -42,28 +44,29 @@ module.exports = (component, basePath) => new Promise((resolve) => {
 
       const source = path.join(tplPath, element);
       let dest = '';
-      let data = {};
+      let data = {
+        name: fileName,
+        kebabCaseName: file_name,
+        camelName: firstUpperCase(fileName),
+      };
       if (element.indexOf('controller') !== -1) {
-        dest = path.join(filePath, `${fileName}.ts`);
-        data = {
-          name: fileName,
-          camelName: firstUpperCase(fileName),
-        }
+        dest = path.join(filePath, `${file_name}.ts`);
       } else if (element.indexOf('html') !== -1) {
-        dest = path.join(filePath, `${fileName}.html`);
+        dest = path.join(filePath, `${file_name}.html`);
       } else if (element.indexOf('scss') !== -1) {
-        dest = path.join(filePath, `${fileName}.scss`);
+        dest = path.join(filePath, `${file_name}.scss`);
       } else if (element.indexOf('index') !== -1) {
         dest = path.join(filePath, `index.ts`);
-        data = {
-          name: fileName,
-          camelName: firstUpperCase(fileName),
-        }
       }
       tplApply.tpl_apply(source, data, dest);
     });
 
     spinner.succeed(`generate ${filePath} success`);
+
+    if (isView) {
+      filePath = path.join(filePath, 'components');
+    }
+    mkdirp(filePath);
     resolve();
 
   })

@@ -1,3 +1,3 @@
-import {{camelName}} from './{{name}}';
+import {{camelName}} from './{{kebabCaseName}}';
 
 export default {{camelName}};

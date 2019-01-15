@@ -19,14 +19,17 @@ const spinner = ora({
 function getDirPathAndName(name, pathName) {
   let fileName = '';
   let filePath = '';
-  const paths = name.split('/');
 
-  fileName = paths[paths.length - 1];
-  fileName = fileName.replace(/[-_](\w)/g, (match, p1) => p1.toUpperCase());
+  let kebabName = camelCaseToKebabCase(name);
+  const paths = kebabName.split('/');
 
+  const file_name = paths[paths.length - 1];
+  fileName = kebabCaseToCamelCase(file_name);
 
   filePath = path.resolve(pathName, ...paths);
+
   return {
+    file_name,
     fileName,
     filePath,
   }
@@ -44,14 +47,17 @@ function getDirPathAndName(name, pathName) {
 function getFilePathAndName(name, pathName) {
   let fileName = '';
   let filePath = '';
-  const paths = name.split('/');
 
-  fileName = paths.splice(-1)[0];
-  fileName = fileName.replace(/[-_](\w)/g, (match, p1) => p1.toUpperCase());
+  let kebabName = camelCaseToKebabCase(name);
+  const paths = kebabName.split('/');
+
+  const file_name = paths.splice(-1)[0];
+  fileName = kebabCaseToCamelCase(file_name);
 
   filePath = path.resolve(pathName, ...paths);
 
   return {
+    file_name,
     fileName,
     filePath,
   }
@@ -68,6 +74,20 @@ function firstUpperCase(name) {
   let firstLetter = name.slice(0, 1) || '';
   let other = name.slice(1);
   return String(firstLetter).toUpperCase() + other;
+}
+
+
+function camelCaseToKebabCase(text) {
+  let t = text || '';
+  t = t.replace(/([A-Z])(\w)/g, (match, p1, p2) => `-${p1.toLowerCase()}${p2}`);
+  t = t.replace(/_/gm, (match, p1) => '-');
+  return t;
+}
+
+function kebabCaseToCamelCase(text) {
+  let t = text || '';
+  t = t.replace(/[-_](\w)/g, (match, p1) => p1.toUpperCase());
+  return t;
 }
 
 module.exports = {

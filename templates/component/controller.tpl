@@ -1,8 +1,8 @@
 import { Vue, Component } from 'vue-property-decorator';
-import './{{name}}.scss';
+import './{{kebabCaseName}}.scss';
 
 @Component({
-  template: require('./{{name}}.html'),
+  template: require('./{{kebabCaseName}}.html'),
 })
 export default class {{camelName}} extends Vue {
   

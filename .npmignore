@@ -14,3 +14,4 @@ yarn-error.log*
 *.sln
 .history
 index.1.js
+tsconfig.json
