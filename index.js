@@ -3,9 +3,10 @@
 var program = require('commander');
 const path = require('path');
 const fs = require('fs');
+const package = require('./package.json');
 const generateComponent = require('./actions/generate-component');
 const generateVue = require('./actions/generate-vue');
-
+const generateDirective = require('./actions/generate-directive');
 
 /**
  * 根据输入配置生成对应文件路径
@@ -22,7 +23,7 @@ function generatePath() {
   }
   // 判断是否传入basePath
   let basePath = program.basePath;
-  basePath = basePath ? basePath === true ? 'src' : basePath : 'src';
+  basePath = basePath ? (basePath === true ? 'src' : basePath) : 'src';
   basePath = path.join(pa, basePath);
   // 拼接特定路径
   // basePath = path.join(basePath, name);
@@ -34,54 +35,101 @@ function generatePath() {
   return basePath;
 }
 
-program
-  .option('-B, --basePath [path]', 'Set BasePath, default src');
+const CREATE_VIEW_DESCRIPTION =
+  'create a view directory with typescript';
+const CREATE_COMPONENT_DESCRIPTION =
+  'create a component directory with typescript';
+const CREATE_VUE_DESCRIPTION = 'create a .vue component with typescript';
+const CREATE_DIRECTIVE_DESCRIPTION = 'create a directive with typescript'
 
 program
-  .command('component [component]')
+  .command('component <component>')
   .alias('c')
-  .description('Create a component directory in the components directory')
-  .action((component) => {
+  .description(CREATE_COMPONENT_DESCRIPTION)
+  .action(component => {
     try {
       let basePath = generatePath();
       generateComponent(component, basePath);
     } catch (error) {
       console.error(error);
     }
-
-  })
+  });
 
 program
-  .command('view [view]')
+  .command('view <view>')
   .alias('v')
-  .description('Create a view directory in the views directory')
-  .action((component) => {
+  .description(CREATE_VIEW_DESCRIPTION)
+  .action(component => {
     try {
       let basePath = generatePath();
       generateComponent(component, basePath, true);
     } catch (error) {
       console.error(error);
     }
-  })
+  });
+
 
 program
-  .command('vue [name]')
-  .description('Create a .vue component')
-  .action((name) => {
+  .command('vue <name>')
+  .description(CREATE_VUE_DESCRIPTION)
+  .action(name => {
     try {
-      let basePath = generatePath('/components');
+      let basePath = generatePath();
       generateVue(name, basePath);
     } catch (error) {
       console.error(error);
     }
-  })
+  });
 
-program.parse(process.argv);
+program
+  .command('directive <name>')
+  .alias('d')
+  .description(CREATE_DIRECTIVE_DESCRIPTION)
+  .action(name => {
+    try {
+      let basePath = generatePath();
+      generateDirective(name, basePath);
+    } catch (error) {
+      console.error(error);
+    }
+  });
 
+program.on('--help', () => {
+  console.log('');
+  console.log('Examples:');
+  console.log('');
+  console.log('  # show usage information');
+  console.log('  $  vt --help');
+  console.log('');
+  console.log('  # show version information');
+  console.log('  $  vt --version');
+  console.log('');
+  console.log(`  # ${CREATE_VIEW_DESCRIPTION}`);
+  console.log(`  $  vt view view-name`);
+  console.log(`  $  vt v path/to/view-name`);
+  console.log('');
+  console.log(`  # ${CREATE_COMPONENT_DESCRIPTION}`);
+  console.log(`  $  vt component component-name`);
+  console.log(`  $  vt c path/to/component-name`);
+  console.log('');
+  console.log(`  # ${CREATE_VUE_DESCRIPTION}`);
+  console.log(`  $  vt vue vue-name`);
+  console.log(`  $  vt vue path/to/vue-name`);
+  console.log('');
+  console.log(`  # ${CREATE_DIRECTIVE_DESCRIPTION}`);
+  console.log(`  $  vt directive directive-name`);
+  console.log(`  $  vt d path/to/directive-name`);
+  console.log('');
+});
+
+program
+  .version(package.version)
+  .option('-B, --basePath [path]', 'set BasePath, default src')
+  .parse(process.argv);
 
 /**
  * Help
  */
 (function help() {
   if (program.args.length < 1) return program.help();
-})()
+})();
