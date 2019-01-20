@@ -7,6 +7,7 @@ const package = require('./package.json');
 const generateComponent = require('./actions/generate-component');
 const generateVue = require('./actions/generate-vue');
 const generateDirective = require('./actions/generate-directive');
+const generateMixin = require('./actions/generate-mixin');
 
 /**
  * 根据输入配置生成对应文件路径
@@ -41,6 +42,7 @@ const CREATE_COMPONENT_DESCRIPTION =
   'create a component directory with typescript';
 const CREATE_VUE_DESCRIPTION = 'create a .vue component with typescript';
 const CREATE_DIRECTIVE_DESCRIPTION = 'create a directive with typescript'
+const CREATE_MIXIN_DESCRIPTON = 'create a mixin with typescript';
 
 program
   .command('component <component>')
@@ -94,6 +96,19 @@ program
     }
   });
 
+  program
+  .command('mixin <name>')
+  .alias('m')
+  .description(CREATE_MIXIN_DESCRIPTON)
+  .action(name => {
+    try {
+      let basePath = generatePath();
+      generateMixin(name, basePath);
+    } catch (error) {
+      console.error(error);
+    }
+  });
+
 program.on('--help', () => {
   console.log('');
   console.log('Examples:');
@@ -119,6 +134,10 @@ program.on('--help', () => {
   console.log(`  # ${CREATE_DIRECTIVE_DESCRIPTION}`);
   console.log(`  $  vt directive directive-name`);
   console.log(`  $  vt d path/to/directive-name`);
+  console.log('');
+  console.log(`  # ${CREATE_MIXIN_DESCRIPTON}`);
+  console.log(`  $  vt mixin mixin-name`);
+  console.log(`  $  vt m path/to/mixin-name`);
   console.log('');
 });
 
