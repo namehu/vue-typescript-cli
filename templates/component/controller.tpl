@@ -5,5 +5,5 @@ import './{{kebabCaseName}}.scss';
   template: require('./{{kebabCaseName}}.html'),
 })
 export default class {{camelName}} extends Vue {
-  
+
 }

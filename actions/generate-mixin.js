@@ -6,7 +6,7 @@ const chalk = require('chalk');
 
 const {
   getFilePathAndName,
-  // firstUpperCase,
+  firstUpperCase,
   spinner,
 } = require('../utils');
 
@@ -18,7 +18,7 @@ module.exports = (name, basePath) => new Promise((resolve, reject) => {
   } = getFilePathAndName(name, basePath);
   spinner.start(`${path.join(filePath, file_name)} is generating......`);
 
-  // const camelName = firstUpperCase(fileName);
+  const camelName = firstUpperCase(fileName);
   const dest = path.join(filePath, `${file_name}.mixin.ts`);
 
   let fileExists = false;
@@ -43,7 +43,7 @@ module.exports = (name, basePath) => new Promise((resolve, reject) => {
     }
     const source = path.join(__dirname, '../templates/mixin.tpl');
     tplApply.tpl_apply(source, {
-      fileName,
+      camelName,
     }, dest);
 
     spinner.succeed(`Generate ${dest} success`);
