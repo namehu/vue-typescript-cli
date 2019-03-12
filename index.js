@@ -8,6 +8,7 @@ const generateComponent = require('./actions/generate-component');
 const generateVue = require('./actions/generate-vue');
 const generateDirective = require('./actions/generate-directive');
 const generateMixin = require('./actions/generate-mixin');
+const generateSimpleComponent = require('./actions/generate-simple-component');
 
 /**
  * 根据输入配置生成对应文件路径
@@ -51,7 +52,8 @@ program
   .action(component => {
     try {
       let basePath = generatePath();
-      generateComponent(component, basePath);
+      program.simple ? generateSimpleComponent(component, basePath) :
+        generateComponent(component, basePath);
     } catch (error) {
       console.error(error);
     }
@@ -96,7 +98,7 @@ program
     }
   });
 
-  program
+program
   .command('mixin <name>')
   .alias('m')
   .description(CREATE_MIXIN_DESCRIPTON)
@@ -144,6 +146,7 @@ program.on('--help', () => {
 program
   .version(package.version)
   .option('-B, --basePath [path]', 'set BasePath, default src')
+  .option('-s, --simple', 'create a component in single file')
   .parse(process.argv);
 
 /**
