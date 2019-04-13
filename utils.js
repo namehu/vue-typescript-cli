@@ -26,6 +26,7 @@ function getDirPathAndName(name, pathName) {
 
   const file_name = paths[paths.length - 1];
   fileName = kebabCaseToCamelCase(file_name);
+  fileName = dotToCamelCase(fileName);
 
   filePath = path.resolve(pathName, ...paths);
 
@@ -55,13 +56,14 @@ function getFilePathAndName(name, pathName) {
 
   const file_name = paths.splice(-1)[0];
   fileName = kebabCaseToCamelCase(file_name);
+  fileName = dotToCamelCase(fileName);
 
   filePath = path.resolve(pathName, ...paths);
 
   return {
-    file_name,
-    fileName,
-    filePath,
+    file_name, // 横杠命名
+    fileName, // 驼峰命名
+    filePath, // 路径
   }
 }
 
@@ -91,6 +93,12 @@ function fisrtLowerCase(name) {
 }
 
 
+/**
+ * 驼峰转横杠写法
+ *
+ * @param {*} text
+ * @returns
+ */
 function camelCaseToKebabCase(text) {
   let t = text || '';
   t = t.replace(/([A-Z])(\w)/g, (match, p1, p2) => `-${p1.toLowerCase()}${p2}`);
@@ -98,9 +106,27 @@ function camelCaseToKebabCase(text) {
   return t;
 }
 
+/**
+ * 横杠转驼峰写法
+ *
+ * @param {*} text
+ * @returns
+ */
 function kebabCaseToCamelCase(text) {
   let t = text || '';
   t = t.replace(/[-_](\w)/g, (match, p1) => p1.toUpperCase());
+  return t;
+}
+
+/**
+ * 点命名转驼峰
+ *
+ * @param {*} text
+ * @returns
+ */
+function dotToCamelCase(text) {
+  let t = text || '';
+  t = t.replace(/\.(\w)/g, (match, p1) => p1.toUpperCase());
   return t;
 }
 

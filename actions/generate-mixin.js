@@ -10,7 +10,7 @@ const {
   spinner,
 } = require('../utils');
 
-module.exports = (name, basePath) => new Promise((resolve, reject) => {
+module.exports = (name, basePath, suffix = 'Mixin') => new Promise((resolve, reject) => {
   const {
     file_name,
     fileName,
@@ -19,7 +19,7 @@ module.exports = (name, basePath) => new Promise((resolve, reject) => {
   spinner.start(`${path.join(filePath, file_name)} is generating......`);
 
   const camelName = firstUpperCase(fileName);
-  const dest = path.join(filePath, `${file_name}.mixin.ts`);
+  const dest = path.join(filePath, `${file_name}.${suffix === 'Service' ? 'service' : 'mixin'}.ts`);
 
   let fileExists = false;
   try {
@@ -27,7 +27,7 @@ module.exports = (name, basePath) => new Promise((resolve, reject) => {
     if (stat.isFile()) {
       fileExists = true;
     }
-  } catch (error) {}
+  } catch (error) { }
 
   if (fileExists) {
     let message = 'Unable to create ';
@@ -44,6 +44,7 @@ module.exports = (name, basePath) => new Promise((resolve, reject) => {
     const source = path.join(__dirname, '../templates/mixin.tpl');
     tplApply.tpl_apply(source, {
       camelName,
+      suffix,
     }, dest);
 
     spinner.succeed(`Generate ${dest} success`);

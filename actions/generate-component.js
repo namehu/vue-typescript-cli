@@ -23,7 +23,7 @@ module.exports = (component, basePath, isView) => new Promise((resolve) => {
   try {
     const stat = fs.statSync(filePath);
     dirExists = stat.isDirectory();
-  } catch (error) {}
+  } catch (error) { }
 
   if (dirExists) {
     spinner.fail(chalk.red(`Unable to create ${filePath}: Folder already exists`))
@@ -37,9 +37,8 @@ module.exports = (component, basePath, isView) => new Promise((resolve) => {
       console.error(err);
       return resolve();
     }
-    const tplPath = path.join(__dirname, '../templates/component');
+    const tplPath = path.join(__dirname, '../templates', isView ? 'view' : 'component');
     const tpls = fs.readdirSync(tplPath);
-
     tpls.forEach((element) => {
 
       const source = path.join(tplPath, element);
@@ -57,6 +56,8 @@ module.exports = (component, basePath, isView) => new Promise((resolve) => {
         dest = path.join(filePath, `${file_name}.scss`);
       } else if (element.indexOf('index') !== -1) {
         dest = path.join(filePath, `index.ts`);
+      } else if (element.indexOf('service') !== -1) {
+        dest = path.join(filePath, `${file_name}.service.ts`);
       }
       tplApply.tpl_apply(source, data, dest);
     });

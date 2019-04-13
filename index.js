@@ -44,6 +44,7 @@ const CREATE_COMPONENT_DESCRIPTION =
 const CREATE_VUE_DESCRIPTION = 'create a .vue component with typescript';
 const CREATE_DIRECTIVE_DESCRIPTION = 'create a directive with typescript'
 const CREATE_MIXIN_DESCRIPTON = 'create a mixin with typescript';
+const CREATE_SERVICE_DESCRIPTON = 'create a service with typescript';
 
 program
   .command('component <component>')
@@ -111,6 +112,20 @@ program
     }
   });
 
+program
+  .command('service <name>')
+  .alias('s')
+  .description(CREATE_SERVICE_DESCRIPTON)
+  .action(name => {
+    try {
+      let basePath = generatePath();
+      generateMixin(name, basePath, 'Service');
+    } catch (error) {
+      console.error(error);
+    }
+  });
+
+
 program.on('--help', () => {
   console.log('');
   console.log('Examples:');
@@ -140,6 +155,10 @@ program.on('--help', () => {
   console.log(`  # ${CREATE_MIXIN_DESCRIPTON}`);
   console.log(`  $  vt mixin mixin-name`);
   console.log(`  $  vt m path/to/mixin-name`);
+  console.log('');
+  console.log(`  # ${CREATE_SERVICE_DESCRIPTON}`);
+  console.log(`  $  vt service service-name`);
+  console.log(`  $  vt m path/to/service-name`);
   console.log('');
 });
 

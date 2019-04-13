@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
     "target": "es2015",
-    "module": "esnext",
+    "module": "CommonJS",
     "strict": true,
     "jsx": "preserve",
     "importHelpers": true,
@@ -9,17 +9,12 @@
     "experimentalDecorators": true,
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
-    "sourceMap": true,
+    "sourceMap": false,
     "baseUrl": ".",
+    "outDir": ".",
     "types": [
-      "webpack-env",
-      "node"
+      "node",
     ],
-    "paths": {
-      "@/*": [
-        "src/*"
-      ]
-    },
     "lib": [
       "esnext",
       "dom",
@@ -28,11 +23,7 @@
     ]
   },
   "include": [
-    "src/**/*.ts",
-    "src/**/*.tsx",
-    "src/**/*.vue",
-    "tests/**/*.ts",
-    "tests/**/*.tsx"
+    "src/*.ts"
   ],
   "exclude": [
     "node_modules/**"
