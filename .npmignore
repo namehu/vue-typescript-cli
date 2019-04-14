@@ -13,5 +13,4 @@ yarn-error.log*
 *.njsproj
 *.sln
 .history
-index.1.js
 tsconfig.json
