@@ -9,6 +9,7 @@ const generateVue = require('./actions/generate-vue');
 const generateDirective = require('./actions/generate-directive');
 const generateMixin = require('./actions/generate-mixin');
 const generateSimpleComponent = require('./actions/generate-simple-component');
+const generateApp = require('./actions/generate-app');
 
 /**
  * 根据输入配置生成对应文件路径
@@ -45,6 +46,7 @@ const CREATE_VUE_DESCRIPTION = 'create a .vue component with typescript';
 const CREATE_DIRECTIVE_DESCRIPTION = 'create a directive with typescript'
 const CREATE_MIXIN_DESCRIPTON = 'create a mixin with typescript';
 const CREATE_SERVICE_DESCRIPTON = 'create a service with typescript';
+const CREATE_PAGE_DESCRIPTON = 'create a page with typescript';
 
 program
   .command('component <component>')
@@ -125,6 +127,19 @@ program
     }
   });
 
+program
+  .command('page <name>')
+  .alias('p')
+  .description(CREATE_PAGE_DESCRIPTON)
+  .action(name => {
+    try {
+      let basePath = generatePath();
+      // generateMixin(name, basePath, 'Service');
+      generateApp(name, basePath);
+    } catch (error) {
+      console.error(error);
+    }
+  });
 
 program.on('--help', () => {
   console.log('');
@@ -159,6 +174,10 @@ program.on('--help', () => {
   console.log(`  # ${CREATE_SERVICE_DESCRIPTON}`);
   console.log(`  $  vt service service-name`);
   console.log(`  $  vt m path/to/service-name`);
+  console.log('');
+  console.log(`  # ${CREATE_PAGE_DESCRIPTON}`);
+  console.log(`  $  vt page page-name`);
+  console.log(`  $  vt p path/to/page-name`);
   console.log('');
 });
 
