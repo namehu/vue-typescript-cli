@@ -56,7 +56,7 @@ program
     try {
       let basePath = generatePath();
       program.simple ? generateSimpleComponent(component, basePath) :
-        generateComponent(component, basePath, false, program.template);
+        generateComponent(component, basePath, false);
     } catch (error) {
       console.error(error);
     }
@@ -69,7 +69,7 @@ program
   .action(component => {
     try {
       let basePath = generatePath();
-      generateComponent(component, basePath, true, program.template);
+      generateComponent(component, basePath, true);
     } catch (error) {
       console.error(error);
     }
@@ -185,7 +185,7 @@ program
   .version(package.version)
   .option('-B, --basePath [path]', 'set BasePath, default src')
   .option('-s, --simple', 'create a component in single file')
-  .option('-t, --template', 'create a component or view with template property')
+  // .option('-t, --template', 'create a component or view with template property')
   .parse(process.argv);
 
 /**

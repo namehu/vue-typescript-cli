@@ -10,7 +10,7 @@ const {
   spinner,
 } = require('../utils');
 
-module.exports = (component, basePath, isView, withTemplate) => new Promise((resolve) => {
+module.exports = (component, basePath, isView) => new Promise((resolve) => {
   let {
     file_name,
     fileName,
@@ -45,36 +45,19 @@ module.exports = (component, basePath, isView, withTemplate) => new Promise((res
 
     const tplPath = path.join(__dirname, '../templates/component');
     let tpls = [];
-    if (isView && withTemplate) {
+    if (isView) {
       tpls = [
-        { source: 'index.tpl', dest: 'index.ts' },
         { source: 'scss.tpl', dest: `${file_name}.scss` },
-        { source: 'service.tpl', dest: `${file_name}.service.ts` },
-        { source: 'controller-service.tpl', dest: `${file_name}.ts` },
-        { source: 'html.tpl', dest: `${file_name}.html` },
-      ];
-    } else if (isView && !withTemplate) {
-      tpls = [
-        { source: 'index.tpl', dest: 'index.ts' },
-        { source: 'scss.tpl', dest: `${file_name}.scss` },
-        { source: 'service.tpl', dest: `${file_name}.service.ts` },
-        { source: 'controller-service-with-render.tpl', dest: `${file_name}.ts` },
         { source: 'html.tpl', dest: `${file_name}.render.html` },
+        { source: 'index-with-service.tpl', dest: 'index.ts' },
+        { source: 'service.tpl', dest: `${file_name}.service.ts` },
       ];
 
-    } else if (withTemplate) {
-      tpls = [
-        { source: 'index.tpl', dest: 'index.ts' },
-        { source: 'scss.tpl', dest: `${file_name}.scss` },
-        { source: 'html.tpl', dest: `${file_name}.html` },
-        { source: 'controller.tpl', dest: `${file_name}.ts` },
-      ];
     } else {
       tpls = [
-        { source: 'index.tpl', dest: 'index.ts' },
         { source: 'scss.tpl', dest: `${file_name}.scss` },
         { source: 'html.tpl', dest: `${file_name}.render.html` },
-        { source: 'controller-with-render.tpl', dest: `${file_name}.ts` },
+        { source: 'index.tpl', dest: 'index.ts' },
       ];
     }
 
