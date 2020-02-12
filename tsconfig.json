@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
-    "target": "es2015",
-    "module": "CommonJS",
+    "target": "ES6",
+    "module": "commonjs",
     "strict": true,
     "jsx": "preserve",
     "importHelpers": true,
@@ -10,22 +10,19 @@
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
     "sourceMap": false,
+    "outDir": "./lib",
     "baseUrl": ".",
-    "outDir": ".",
-    "types": [
-      "node",
-    ],
     "lib": [
       "esnext",
-      "dom",
-      "dom.iterable",
-      "scripthost"
+    ],
+    "typeRoots": [
+      "./node_modules/@types"
     ]
   },
   "include": [
-    "src/*.ts"
+    "sources/*.ts"
   ],
   "exclude": [
-    "node_modules/**"
+    "node_modules"
   ]
 }

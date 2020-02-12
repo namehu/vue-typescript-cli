@@ -7,7 +7,7 @@
     "vt": "./index.js"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "release": "standard-version"
   },
   "dependencies": {
     "chalk": "^2.4.0",
@@ -22,10 +22,31 @@
   "author": "namehu",
   "license": "ISC",
   "devDependencies": {
+    "@commitlint/cli": "^8.3.5",
+    "@commitlint/config-conventional": "^8.3.4",
     "@types/commander": "^2.12.2",
     "@types/node": "^10.12.18",
+    "@types/ora": "^3.2.0",
+    "cz-conventional-changelog": "^3.1.0",
+    "husky": "^4.2.2",
+    "standard-version": "^7.1.0",
     "tslib": "^1.9.3",
     "typescript": "^3.2.2",
     "vue-property-decorator": "^7.3.0"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
+  },
+  "commitlint": {
+    "extends": [
+      "@commitlint/config-conventional"
+    ]
+  },
+  "husky": {
+    "hooks": {
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
+    }
   }
 }
