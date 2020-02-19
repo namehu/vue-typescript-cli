@@ -25,9 +25,7 @@ export function fileIsExist(filePath: string) {
     if (stat.isFile()) {
       isExist = true;
     }
-  } catch (error) {
-    throw error;
-  }
+  } catch (error) {}
 
   if (isExist) {
     spinner.fail(chalk.red(`File already exists: Unable to create ${filePath}`));
