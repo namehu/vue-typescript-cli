@@ -48,7 +48,7 @@ async function rollupTask() {
 
   const inputOption = {
     input: 'sources/index.ts',
-    external: ['commander', 'path', 'fs', 'chalk', 'ora', 'tpl_apply', 'mkdirp'],
+    external: ['commander', 'path', 'fs', 'chalk', 'ora', 'mkdirp'],
     plugins: [
       preserveShebangs(),
       json(),

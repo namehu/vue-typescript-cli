@@ -1,7 +1,6 @@
 import mkdirp from 'mkdirp';
-import tplApply from 'tpl_apply';
 import path from 'path';
-import { getFilePathAndName, spinner, fileIsExist } from './utils';
+import { getFilePathAndName, spinner, fileIsExist, applayTemplate } from './utils';
 
 export default async function generateSimpleComponent(name: string, basePath: string) {
   const { file_name, filePath, filePascalName } = getFilePathAndName(name, basePath);
@@ -15,7 +14,7 @@ export default async function generateSimpleComponent(name: string, basePath: st
 
   await mkdirp(filePath);
 
-  tplApply.tpl_apply(source, { filePascalName }, dest);
+  applayTemplate(source, dest, { filePascalName });
 
   spinner.succeed(`Generate ${dest} success`);
 }

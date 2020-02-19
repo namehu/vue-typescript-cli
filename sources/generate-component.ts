@@ -1,7 +1,6 @@
 import mkdirp from 'mkdirp';
-import tplApply from 'tpl_apply';
 import path from 'path';
-import { getDirPathAndName, spinner, dirIsExist } from './utils';
+import { getDirPathAndName, spinner, dirIsExist, applayTemplate } from './utils';
 
 /**
  * 生成component组件
@@ -44,11 +43,12 @@ export default async function generateComponent(name: string, basePath: string, 
 
   // const tpls = fs.readdirSync(tplPath);
   tpls.forEach(({ source, dest }) => {
-    tplApply.tpl_apply(
+    applayTemplate(
       path.join(tplPath, source),
+      path.join(filePath, dest),
       data,
-      path.join(filePath, dest)
     );
+
   });
 
   // 如果是view的话。需要额外的生成一个组件文件夹

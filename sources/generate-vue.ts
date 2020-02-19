@@ -1,7 +1,6 @@
 import mkdirp from 'mkdirp';
-import tplApply from 'tpl_apply';
 import path from 'path';
-import { getFilePathAndName, spinner, fileIsExist } from './utils';
+import { getFilePathAndName, spinner, fileIsExist, applayTemplate } from './utils';
 
 /**
  * 生成.vue 单文件组件
@@ -22,7 +21,7 @@ export default async function genereateVue(name: string, basePath: string) {
 
   await mkdirp(filePath);
 
-  tplApply.tpl_apply(source, { filePascalName }, dest);
+  applayTemplate(source, dest, { filePascalName });
 
   const message = path.join(filePath, `${filePascalName}.vue`);
   spinner.succeed(`Generate ${message} success`);

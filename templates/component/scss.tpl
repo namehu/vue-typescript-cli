@@ -1,3 +1,3 @@
-.{{kebabCaseName}} {
+.[:=kebabCaseName:] {
 
 }

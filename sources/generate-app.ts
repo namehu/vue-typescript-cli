@@ -1,8 +1,7 @@
 import mkdirp from 'mkdirp';
-import tplApply from 'tpl_apply';
 import path from 'path';
 import generateComponent from './generate-component';
-import { getDirPathAndName, spinner, dirIsExist } from './utils';
+import { getDirPathAndName, spinner, dirIsExist, applayTemplate } from './utils';
 
 /**
  * 生成一个完整的app
@@ -24,11 +23,7 @@ export default async function generateApp(name: string, basePath: string) {
   await mkdirp(filePath)
 
   // 生成main文件
-  tplApply.tpl_apply(
-    path.join(__dirname, '../templates/page', 'main.tpl'),
-    {},
-    path.join(filePath, 'main.ts')
-  );
+  applayTemplate(path.join(__dirname, '../templates/page', 'main.tpl'), path.join(filePath, 'main.ts'));
 
   // 新建components目录
   const comPath = filePath + '/components';

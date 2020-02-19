@@ -1,7 +1,9 @@
-import chalk from 'chalk';
-import path from 'path';
+import fs, { readFileSync, writeFileSync } from 'fs';
 import ora from 'ora';
-import fs from 'fs';
+import path from 'path';
+import chalk from 'chalk';
+import tppl from './tppl';
+
 import spinnerStyle from '../spinners.json';
 
 export const spinner = ora({ spinner: spinnerStyle.dots });
@@ -29,6 +31,17 @@ export function fileIsExist(filePath: string) {
   }
 
   return isExist;
+}
+
+export function applayTemplate(tpl: string, dest: string, data: { [i: string]: any } = {}) {
+
+  try {
+    const ts = readFileSync(tpl).toString();
+    writeFileSync(dest, tppl(ts, data));
+  } catch (error) {
+    spinner.fail('applay template error');
+    throw error;
+  }
 }
 
 /**

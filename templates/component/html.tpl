@@ -1,3 +1,3 @@
-<div class="{{kebabCaseName}}">
+<div class="[:=kebabCaseName:]">
 
 </div>

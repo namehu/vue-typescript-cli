@@ -1,7 +1,6 @@
 import mkdirp from 'mkdirp';
-import tplApply from 'tpl_apply';
 import path from 'path';
-import { getFilePathAndName, spinner, fileIsExist } from './utils';
+import { getFilePathAndName, spinner, fileIsExist, applayTemplate } from './utils';
 
 /**
  * 生成指令模板
@@ -23,7 +22,7 @@ export default async function generateDirective(name: string, basePath: string) 
 
   await mkdirp(filePath)
 
-  tplApply.tpl_apply(source, {}, dest);
+  applayTemplate(source, dest);
 
   spinner.succeed(`Generate ${dest} success`);
 }
