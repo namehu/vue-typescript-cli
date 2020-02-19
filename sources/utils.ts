@@ -4,10 +4,7 @@ import ora from 'ora';
 import fs from 'fs';
 import spinnerStyle from '../spinners.json';
 
-export const spinner = ora({
-  text: chalk.blue('generate begin'),
-  spinner: spinnerStyle.dots,
-});
+export const spinner = ora({ spinner: spinnerStyle.dots });
 
 
 /**
@@ -25,7 +22,7 @@ export function fileIsExist(filePath: string) {
     if (stat.isFile()) {
       isExist = true;
     }
-  } catch (error) {}
+  } catch (error) { }
 
   if (isExist) {
     spinner.fail(chalk.red(`File already exists: Unable to create ${filePath}`));

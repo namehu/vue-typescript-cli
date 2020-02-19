@@ -25,7 +25,7 @@
     "commander": "^2.15.1",
     "handlebars": ">=4.0.0",
     "mkdirp": "^1.0.3",
-    "ora": "^2.0.0",
+    "ora": "^4.0.3",
     "tpl_apply": "^1.0.5",
     "uglify-js": ">=2.6.0"
   },
