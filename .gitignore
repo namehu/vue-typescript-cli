@@ -6,7 +6,7 @@ yarn-debug.log*
 yarn-error.log*
 src
 server
-
+.TODO
 # Editor directories and files
 .idea
 .vscode
@@ -15,4 +15,3 @@ server
 *.njsproj
 *.sln
 .history
-index.1.js
