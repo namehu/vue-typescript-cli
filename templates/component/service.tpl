@@ -1,6 +1,6 @@
 import { Vue, Component } from 'vue-property-decorator';
 
 @Component
-export default class {{camelName}}Service extends Vue {
+export default class {{filePascalName}}Service extends Vue {
 
 }

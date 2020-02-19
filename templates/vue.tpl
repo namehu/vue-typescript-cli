@@ -7,7 +7,7 @@ import Vue from 'vue';
 import { Component } from 'vue-class-component';
 
 @Component
-export default class {{camelName}} extends Vue {
+export default class {{filePascalName}} extends Vue {
 
 }
 </script>
