@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.3.0](https://github.com/namehu/vue-typescript-cli/compare/v0.2.0...v0.3.0) (2020-02-19)
+
+
+### Features
+
+* 引入tppl,极致模板引擎 ([eec4776](https://github.com/namehu/vue-typescript-cli/commit/eec477660333bb3137dda08977999a66739b0db5))
+* 提交最新的打包文件 ([e289880](https://github.com/namehu/vue-typescript-cli/commit/e289880417e79e986ce576b77103be5bb5ab811c))
+* 更换tppl引擎，替换老模板引擎 ([6ea0266](https://github.com/namehu/vue-typescript-cli/commit/6ea02662e3bb86379d2b1914fe0c63453df244ff))
+* 移除tpl_applay声明文件 ([6c0d3b9](https://github.com/namehu/vue-typescript-cli/commit/6c0d3b9eca1a343993d65e2912ff06848d17650e))
+
+
+### Bug Fixes
+
+* 修复创建文件报错的问题 ([a59872c](https://github.com/namehu/vue-typescript-cli/commit/a59872c495d191ed961fcf83ea2e3791f7fcfcb7))
+
 ## 0.2.0 (2020-02-19)
 
 
