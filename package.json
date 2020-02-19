@@ -2,35 +2,64 @@
   "name": "vt-cli",
   "version": "0.1.0",
   "description": "",
-  "main": "index.js",
+  "main": "lib/index.js",
   "bin": {
-    "vt": "./index.js"
+    "vt": "./lib/index.js"
   },
+  "files": [
+    "lib",
+    "sources",
+    "templates"
+  ],
   "scripts": {
-    "release": "standard-version"
+    "build": "gulp",
+    "build:types": "gulp buildTypes",
+    "build:js": "gulp",
+    "pub": "git push --follow-tags origin master && npm publish",
+    "release": "standard-version",
+    "type-check": "tsc --noEmit",
+    "type-check:watch": "npm run type-check -- --watch"
   },
   "dependencies": {
     "chalk": "^2.4.0",
     "commander": "^2.15.1",
-    "mkdirp": "^0.5.1",
-    "tpl_apply": "^1.0.5",
+    "handlebars": ">=4.0.0",
+    "mkdirp": "^1.0.3",
     "ora": "^2.0.0",
-    "uglify-js": ">=2.6.0",
-    "handlebars": ">=4.0.0"
+    "tpl_apply": "^1.0.5",
+    "uglify-js": ">=2.6.0"
   },
   "keywords": [],
   "author": "namehu",
   "license": "ISC",
   "devDependencies": {
+    "@babel/cli": "^7.8.4",
+    "@babel/core": "^7.8.4",
+    "@babel/plugin-proposal-class-properties": "^7.8.3",
+    "@babel/plugin-transform-runtime": "^7.8.3",
+    "@babel/preset-env": "^7.8.4",
+    "@babel/preset-typescript": "^7.8.3",
     "@commitlint/cli": "^8.3.5",
     "@commitlint/config-conventional": "^8.3.4",
+    "@rollup/plugin-json": "^4.0.2",
     "@types/commander": "^2.12.2",
+    "@types/mkdirp": "^1.0.0",
     "@types/node": "^10.12.18",
-    "@types/ora": "^3.2.0",
+    "babel-plugin-transform-runtime": "^6.23.0",
     "cz-conventional-changelog": "^3.1.0",
+    "gulp": "^4.0.2",
+    "gulp-clean": "^0.4.0",
+    "gulp-typescript": "^6.0.0-alpha.1",
     "husky": "^4.2.2",
+    "rollup": "^1.31.1",
+    "rollup-plugin-babel": "^4.3.3",
+    "rollup-plugin-commonjs": "^10.1.0",
+    "rollup-plugin-node-resolve": "^5.2.0",
+    "rollup-plugin-preserve-shebangs": "^0.1.2",
+    "rollup-plugin-terser": "^5.2.0",
     "standard-version": "^7.1.0",
-    "tslib": "^1.9.3",
+    "tslib": "^1.10.0",
+    "tslint": "^6.0.0",
     "typescript": "^3.2.2",
     "vue-property-decorator": "^7.3.0"
   },
