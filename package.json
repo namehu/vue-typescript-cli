@@ -2,19 +2,17 @@
   "name": "vt-cli",
   "version": "0.2.0",
   "description": "",
-  "main": "lib/index.js",
+  "main": "dist/index.js",
   "bin": {
-    "vt": "./lib/index.js"
+    "vt": "./dist/index.js"
   },
   "files": [
-    "lib",
+    "dist",
     "sources",
     "templates"
   ],
   "scripts": {
-    "build": "gulp",
-    "build:types": "gulp buildTypes",
-    "build:js": "gulp",
+    "build": "rollup -c",
     "pub": "git push --follow-tags origin master && npm publish",
     "release": "standard-version",
     "type-check": "tsc --noEmit",
@@ -23,11 +21,8 @@
   "dependencies": {
     "chalk": "^2.4.0",
     "commander": "^2.15.1",
-    "handlebars": ">=4.0.0",
     "mkdirp": "^1.0.3",
-    "ora": "^4.0.3",
-    "tpl_apply": "^1.0.5",
-    "uglify-js": ">=2.6.0"
+    "ora": "^4.0.3"
   },
   "keywords": [],
   "author": "namehu",
@@ -42,17 +37,14 @@
     "@commitlint/cli": "^8.3.5",
     "@commitlint/config-conventional": "^8.3.4",
     "@rollup/plugin-json": "^4.0.2",
-    "@types/commander": "^2.12.2",
     "@types/mkdirp": "^1.0.0",
     "@types/node": "^10.12.18",
     "babel-plugin-transform-runtime": "^6.23.0",
     "cz-conventional-changelog": "^3.1.0",
-    "gulp": "^4.0.2",
-    "gulp-clean": "^0.4.0",
-    "gulp-typescript": "^6.0.0-alpha.1",
     "husky": "^4.2.2",
     "rollup": "^1.31.1",
     "rollup-plugin-babel": "^4.3.3",
+    "rollup-plugin-clear": "^2.0.7",
     "rollup-plugin-commonjs": "^10.1.0",
     "rollup-plugin-node-resolve": "^5.2.0",
     "rollup-plugin-preserve-shebangs": "^0.1.2",
@@ -60,8 +52,7 @@
     "standard-version": "^7.1.0",
     "tslib": "^1.10.0",
     "tslint": "^6.0.0",
-    "typescript": "^3.2.2",
-    "vue-property-decorator": "^7.3.0"
+    "typescript": "^3.7.5"
   },
   "config": {
     "commitizen": {
