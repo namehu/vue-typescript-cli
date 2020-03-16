@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.3.1](https://github.com/namehu/vue-typescript-cli/compare/v0.3.0...v0.3.1) (2020-03-16)
+
+
+### Features
+
+* **template:** 修复view模板中没有name字段的问题以及组件name缺少逗号的问题 ([d6c091d](https://github.com/namehu/vue-typescript-cli/commit/d6c091deab1382c0fef7eeaa4e3612d99b677806))
+
 ## [0.3.0](https://github.com/namehu/vue-typescript-cli/compare/v0.2.0...v0.3.0) (2020-02-19)
 
 
